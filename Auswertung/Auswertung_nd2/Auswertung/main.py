@@ -1,10 +1,10 @@
-from Auswertung_nd2.Auswertung.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
+from Auswertung.Auswertung_nd2.Auswertung.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
 import javabridge
 import bioformats
-from Auswertung_nd2.Auswertung.helper_functions import *
-from Auswertung_nd2.Auswertung.read_nd2 import readnd2File, readnd2File_ideal, rename_files, delete
+from Auswertung.Auswertung_nd2.Auswertung.helper_functions import *
+from Auswertung.Auswertung_nd2.Auswertung.read_nd2 import readnd2File, readnd2File_ideal, rename_files, delete
 from datetime import datetime
-from Auswertung_nd2.Auswertung.flowchart import create_flowchart
+from Auswertung.Auswertung_nd2.Auswertung.flowchart import create_flowchart
 import pandas as pd
 import tifffile as tiff
 from PIL import Image
