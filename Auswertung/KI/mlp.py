@@ -11,14 +11,15 @@ import numpy as np
 import timing
 import pickle
 
+path = "dataset_488_modu.csv"
 
-data = pd.read_csv("csv/dataset_488.csv")
+data = pd.read_csv("csv/" + path)
 data = data.iloc[:, 1:]
 le = LabelEncoder()
 sc = StandardScaler()
 data['art'] = le.fit_transform(data["art"])
-data[["intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]] = sc.fit_transform(
-    data[["intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]])
+data[["mod_std", "mod_mean"]] = sc.fit_transform(
+    data[["mod_std", "mod_mean"]])
 Y = data.iloc[:, 0]
 X = data.iloc[:, 1:]
 
@@ -70,12 +71,12 @@ def accuracy(confucion_matrix):
     return diagonal_sum / sum_of_all_elements
 
 
-# mlp.fit(x_train, y_train)
-#
-#
-# # save the classifier
-# with open('mlp_model/mlp_classifier', 'wb') as fid:
-#     pickle.dump(mlp, fid)
+mlp.fit(x_train, y_train)
+
+
+# save the classifier
+with open('mlp_model/mlp_classifier', 'wb') as fid:
+    pickle.dump(mlp, fid)
 
 # load it again
 with open('mlp_model/mlp_classifier', 'rb') as fid:
@@ -90,6 +91,6 @@ class_names = ["Ahorn", "Buche", "Eiche", "Fichte", "Kiefer", "Laerche"]
 guete = ["AI", "AII", "AIII", "AIV", "Praep"]
 plot_confusion_matrix(mlp_loaded, x_test, y_test, display_labels=class_names)
 plt.title("Accuracy: " + str(acc))
-plt.savefig("confusion_matrix_488.png")
+plt.savefig("confusion_matrix/confusion_matrix" + path + ".png")
 
 

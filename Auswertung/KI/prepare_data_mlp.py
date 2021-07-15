@@ -55,8 +55,8 @@ def create_dataset(files):
 
 def create_dataset_from_nd2():
 
-    my_path = r'/media/linux/Seagate Expansion Drive/nd2_files'
-    files = glob.glob(my_path + '/488*/**/*.nd2', recursive=True)
+    my_path = r'/media/linux/Seagate Expansion Drive/nd2_files/488 nm x10M16 100pct Idealholz'
+    files = glob.glob(my_path + '/**/**/*.nd2', recursive=True)
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
     all_data = []
@@ -94,13 +94,19 @@ def create_dataset_from_nd2():
                     mean = matrix.mean()
                     data.append(std)
                     data.append(mean)
-                elif "Phase Lifetime" in channel:
-                    matrix = values[:, :, i]
-                    std = matrix.std()
-                    mean = matrix.mean()
-                    data.append(std)
-                    data.append(mean)
-                elif "Modulation Lifetime" in channel:
+                # elif "Phase Lifetime" in channel:
+                #     matrix = values[:, :, i]
+                #     std = matrix.std()
+                #     mean = matrix.mean()
+                #     data.append(std)
+                #     data.append(mean)
+                # elif "Modulation Lifetime" in channel:
+                #     matrix = values[:, :, i]
+                #     std = matrix.std()
+                #     mean = matrix.mean()
+                #     data.append(std)
+                #     data.append(mean)
+                else:
                     matrix = values[:, :, i]
                     std = matrix.std()
                     mean = matrix.mean()
@@ -110,15 +116,15 @@ def create_dataset_from_nd2():
 
         all_data.append(data)
 
-    columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]
+    columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean", "phase_life_std", "phase_life_mean", "mod_life_std", "mod_life_mean"]
     all_data = pd.DataFrame(data=all_data, columns=columns)
     save_path = "csv/"
     if "488" in files[0]:
-        all_data.to_csv(save_path + "dataset_488.csv")
+        all_data.to_csv(save_path + "dataset_488_all_channels.csv")
     elif "445" in files[0]:
-        all_data.to_csv(save_path + "dataset_445.csv")
+        all_data.to_csv(save_path + "dataset_445_all_channels.csv")
     elif "405" in files[0]:
-        all_data.to_csv("dataset_405.csv")
+        all_data.to_csv("dataset_405_all_channels.csv")
 
     javabridge.kill_vm()
 
