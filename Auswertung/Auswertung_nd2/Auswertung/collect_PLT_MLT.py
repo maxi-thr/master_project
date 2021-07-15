@@ -2,9 +2,11 @@ import glob
 
 
 def collect_plt_mlt():
-    my_path = 'nd2_files'
-    files = glob.glob(my_path + '/**/**/*Lifetime.tif', recursive=True)
-    files = set(files)
+    my_path = r'F:\nd2_files\488 nm x10M16 100pct Altholz_Eins'
+    files = glob.glob(my_path + '/**/**/*Lifetime*.tif', recursive=True)
+    intensity_files = glob.glob(my_path + '/**/**/*Intensity*.tif', recursive=True)
+    files += intensity_files
+    files = list(dict.fromkeys(files))
     return files
 
 

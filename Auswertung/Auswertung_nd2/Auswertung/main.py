@@ -2,27 +2,68 @@ from Auswertung_nd2.Auswertung.collect_PLT_MLT import collect_plt_mlt, collect_f
 import javabridge
 import bioformats
 from Auswertung_nd2.Auswertung.helper_functions import *
-from Auswertung_nd2.Auswertung.read_nd2 import readnd2File, readnd2File_ideal
+from Auswertung_nd2.Auswertung.read_nd2 import readnd2File, readnd2File_ideal, rename_files, delete
 from datetime import datetime
 from Auswertung_nd2.Auswertung.flowchart import create_flowchart
+import pandas as pd
+import tifffile as tiff
+from PIL import Image
 
 
+delete()
 start = datetime.now()
 readnd2 = False
 readnd2_ideal = False
+images = []
+exposure_time = []
 if readnd2:
     readnd2File()
 
 if readnd2_ideal:
-    readnd2File_ideal()
+    images, exposure_time = readnd2File_ideal()
+
+
 
 all_PLT_MLT_multi = {"PLT": {}, "MLT": {}}
 all_PLT_MLT_single = {"PLT": {}, "MLT": {}}
-
 files = list(collect_plt_mlt())
 files = sorted(files)
 ideal_files = collect_files_for_each_type(files)
 
+
+def save_images(files):
+    for type in files:
+        for tif in type:
+            im = tiff.imread(tif)
+            name = Image.open(tif)
+            name = name.filename.split('.')[0]
+            name = name.split('\\')[6]
+            art = ""
+            if "Fichte" in name:
+                art = "Fichte"
+
+            elif "Ahorn" in name:
+                art = "Ahorn"
+            elif "Buche" in name:
+                art = "Buche"
+            elif "Kiefer" in name:
+                art = "Kiefer"
+            elif "Laerche" in name:
+                art = "Laerche"
+            elif "Eiche" in name:
+                art = "Eiche"
+
+            if "488" in name:
+                plt.imsave('../../KI/images/488nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                print(name)
+            elif "445" in name:
+                plt.imsave('../../KI/images/445nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                print(name)
+            elif "405" in name:
+                plt.imsave('../../KI/images/405nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                print(name)
+
+save_images(ideal_files)
 
 javabridge.start_vm(class_path=bioformats.JARS)
 
@@ -74,8 +115,43 @@ with (open("dictionary_matrix.pickle", "rb")) as openfile:
 #
 #                 reader.close()
 #
+#
 # read_matrix_multi()
-# save_dictionary(all_PLT_MLT_multi)
+#save_dictionary(all_PLT_MLT_multi)
+
+
+def create_network_data(dictionary):
+    all_matrix = {}
+    keys = list(dictionary["PLT"].keys())
+    for i in range(len(keys)):
+        mat = dictionary["PLT"][keys[i]]["matrix"]
+        art_nr = None
+        std = mat.std()
+        mean = mat.mean()
+        if "Fichte" in keys[i]:
+            art_nr = 0
+        elif "Ahorn" in keys[i]:
+            art_nr = 1
+        elif "Buche" in keys[i]:
+            art_nr = 2
+        elif "Eiche" in keys[i]:
+            art_nr = 3
+        elif "Kiefer" in keys[i]:
+            art_nr = 4
+        elif "Laerche" in keys[i]:
+            art_nr = 5
+        all_matrix.update({i: {"art": keys[i].split("_")[0],
+                               "art_nr": art_nr,
+                               "matrix": mat,
+                               "std": std,
+                               "mean": mean}})
+    network_data = pd.DataFrame.from_dict(all_matrix)
+
+    return network_data.T
+
+
+network_data = create_network_data(all_PLT_MLT_multi)
+network_data.to_pickle("network_data.pickle")
 
 
 def create_list():
@@ -133,8 +209,6 @@ def create_mat_ges():
 
 
 create_mat_ges()
-# with open('train_data.pickle', 'wb') as f:
-#     pickle.dump(all_PLT_MLT_multi, f, pickle.HIGHEST_PROTOCOL)
 
 """Plot Histogram und Phasor für Mulit-Matrix"""
 for i in range(len(types)):
