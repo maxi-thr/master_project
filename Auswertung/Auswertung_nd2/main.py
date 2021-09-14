@@ -1,19 +1,12 @@
-from Auswertung.Auswertung_nd2.Auswertung.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
-import javabridge
-import bioformats
-from Auswertung.Auswertung_nd2.Auswertung.helper_functions import *
-from Auswertung.Auswertung_nd2.Auswertung.read_nd2 import readnd2File, readnd2File_ideal, rename_files, delete
-from datetime import datetime
-from Auswertung.Auswertung_nd2.Auswertung.flowchart import create_flowchart
-import pandas as pd
+from Auswertung_nd2.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
+from Auswertung_nd2.helper_functions import *
+from Auswertung_nd2.read_nd2 import readnd2File, readnd2File_ideal
 import tifffile as tiff
 from PIL import Image
 
 
-delete()
-start = datetime.now()
 readnd2 = False
-readnd2_ideal = False
+readnd2_ideal = True
 images = []
 exposure_time = []
 if readnd2:
@@ -21,7 +14,6 @@ if readnd2:
 
 if readnd2_ideal:
     images, exposure_time = readnd2File_ideal()
-
 
 
 all_PLT_MLT_multi = {"PLT": {}, "MLT": {}}
@@ -54,17 +46,24 @@ def save_images(files):
                 art = "Eiche"
 
             if "488" in name:
-                plt.imsave('../../KI/images/488nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave('../../Neuronale_netze/images/488nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
                 print(name)
             elif "445" in name:
-                plt.imsave('../../KI/images/445nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave('../../Neuronale_netze/images/445nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
                 print(name)
             elif "405" in name:
-                plt.imsave('../../KI/images/405nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave('../../Neuronale_netze/images/405nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
                 print(name)
+
 
 save_images(ideal_files)
 
+
+"""
+Nachfolgender Code ist obsolete!
+Wurde zu Beginn für die Erstellung von Phasorplots verwendet.
+"""
+"""
 javabridge.start_vm(class_path=bioformats.JARS)
 
 
@@ -89,69 +88,27 @@ def interpolate_single_matrix():
 
             reader.close()
 
-all_PLT_MLT_multi = {}
-with (open("dictionary_matrix.pickle", "rb")) as openfile:
-    while True:
-        try:
-            all_PLT_MLT_multi.update(pickle.load(openfile))
-        except EOFError:
-            break
+
+def read_matrix_multi():
+    for type in ideal_files:
+        for file in type:
+            with bioformats.ImageReader(file) as reader:
+                matrix = reader.read()
+                name_data = os.path.basename(file)
+                name_data_struct = name_data.rsplit('_', 6)[0]
+
+                "Für mehrfach plots"
+
+                if "Phase" in name_data:
+                    all_PLT_MLT_multi["PLT"].update({name_data_struct: {"matrix": matrix}})
+                else:
+                    all_PLT_MLT_multi["MLT"].update({name_data_struct: {"matrix": matrix}})
+
+                reader.close()
 
 
-# def read_matrix_multi():
-#     for type in ideal_files:
-#         for file in type:
-#             with bioformats.ImageReader(file) as reader:
-#                 matrix = reader.read()
-#                 name_data = os.path.basename(file)
-#                 name_data_struct = name_data.rsplit('_', 6)[0]
-#
-#                 "Für mehrfach plots"
-#
-#                 if "Phase" in name_data:
-#                     all_PLT_MLT_multi["PLT"].update({name_data_struct: {"matrix": matrix}})
-#                 else:
-#                     all_PLT_MLT_multi["MLT"].update({name_data_struct: {"matrix": matrix}})
-#
-#                 reader.close()
-#
-#
-# read_matrix_multi()
-#save_dictionary(all_PLT_MLT_multi)
-
-
-def create_network_data(dictionary):
-    all_matrix = {}
-    keys = list(dictionary["PLT"].keys())
-    for i in range(len(keys)):
-        mat = dictionary["PLT"][keys[i]]["matrix"]
-        art_nr = None
-        std = mat.std()
-        mean = mat.mean()
-        if "Fichte" in keys[i]:
-            art_nr = 0
-        elif "Ahorn" in keys[i]:
-            art_nr = 1
-        elif "Buche" in keys[i]:
-            art_nr = 2
-        elif "Eiche" in keys[i]:
-            art_nr = 3
-        elif "Kiefer" in keys[i]:
-            art_nr = 4
-        elif "Laerche" in keys[i]:
-            art_nr = 5
-        all_matrix.update({i: {"art": keys[i].split("_")[0],
-                               "art_nr": art_nr,
-                               "matrix": mat,
-                               "std": std,
-                               "mean": mean}})
-    network_data = pd.DataFrame.from_dict(all_matrix)
-
-    return network_data.T
-
-
-network_data = create_network_data(all_PLT_MLT_multi)
-network_data.to_pickle("network_data.pickle")
+read_matrix_multi()
+save_dictionary(all_PLT_MLT_multi)
 
 
 def create_list():
@@ -210,7 +167,7 @@ def create_mat_ges():
 
 create_mat_ges()
 
-"""Plot Histogram und Phasor für Mulit-Matrix"""
+""Plot Histogram und Phasor für Mulit-Matrix""
 for i in range(len(types)):
     mat_plt_x = all_PLT_MLT_multi["PLT"][types[i]]["mat_plt_x"]
     mat_plt_y = all_PLT_MLT_multi["PLT"][types[i]]["mat_plt_y"]
@@ -259,52 +216,52 @@ for i in range(len(types)):
                                     "Ppos": ppos}})
 
 
-"""Plot Histogram und Phasor für Single-Matrix"""
+""Plot Histogram und Phasor für Single-Matrix""
 
 counts = len(all_plt)
 
-# for i in range(counts):
-#     mat_plt_x = all_PLT_MLT_single["PLT"][all_plt[i]]["mat_plt_x"]
-#     mat_plt_y = all_PLT_MLT_single["PLT"][all_plt[i]]["mat_plt_y"]
-#     mat_plt_dr = all_PLT_MLT_single["PLT"][all_plt[i]]["dr_mat"]
-#     mat_mlt_x = all_PLT_MLT_single["MLT"][all_mlt[i]]["mat_mlt_x"]
-#     mat_mlt_y = all_PLT_MLT_single["MLT"][all_mlt[i]]["mat_mlt_y"]
-#     mat_mlt_dr = all_PLT_MLT_single["MLT"][all_mlt[i]]["dr_mat"]
-#
-#     mat_plt = dict(zip(mat_plt_x, mat_plt_y))
-#     mat_plt = np.array(list(mat_plt.items()))
-#     mat_mlt = dict(zip(mat_mlt_x, mat_mlt_y))
-#     mat_mlt = np.array(list(mat_mlt.items()))
-#     peaks_to_save_all = []
-#     gcurve_all = []
-#     peaks_plt, _ = scipy.signal.find_peaks(mat_plt[:, 1], prominence=max(mat_plt[:, 1]) / 100,
-#                                            height=max(mat_plt[:, 1]) / 10)
-#     peaks_plt, gcurve_plt = find_peak(mat_plt, mat_plt_dr, peaks_plt, peaks_to_save_all, gcurve_all)
-#     peaks_to_save_all = []
-#     gcurve_all = []
-#     peaks_mlt, _ = scipy.signal.find_peaks(mat_mlt[:, 1], prominence=max(mat_mlt[:, 1]) / 100,
-#                                            height=max(mat_mlt[:, 1]) / 10)
-#     peaks_mlt, gcurve_mlt = find_peak(mat_mlt, mat_mlt_dr, peaks_mlt, peaks_to_save_all, gcurve_all)
-#     peaks_to_save_all = []
-#     gcurve_all = []
-#
-#     plot_gcurve(peaks_plt, gcurve_plt, mat_plt, all_plt[i])
-#
-#     qpos_all = []
-#     ppos_all = []
-#     q_stdev_circ_all = []
-#     p_stdev_circ_all = []
-#     qpos, ppos, q_stdev_circ, p_stdev_circ = phasor_eval(peaks_plt, peaks_mlt, qpos_all, ppos_all,
-#                                                          q_stdev_circ_all, p_stdev_circ_all)
-#     plot_phasor(qpos, ppos, q_stdev_circ, p_stdev_circ, all_plt[i])
+for i in range(counts):
+    mat_plt_x = all_PLT_MLT_single["PLT"][all_plt[i]]["mat_plt_x"]
+    mat_plt_y = all_PLT_MLT_single["PLT"][all_plt[i]]["mat_plt_y"]
+    mat_plt_dr = all_PLT_MLT_single["PLT"][all_plt[i]]["dr_mat"]
+    mat_mlt_x = all_PLT_MLT_single["MLT"][all_mlt[i]]["mat_mlt_x"]
+    mat_mlt_y = all_PLT_MLT_single["MLT"][all_mlt[i]]["mat_mlt_y"]
+    mat_mlt_dr = all_PLT_MLT_single["MLT"][all_mlt[i]]["dr_mat"]
+
+    mat_plt = dict(zip(mat_plt_x, mat_plt_y))
+    mat_plt = np.array(list(mat_plt.items()))
+    mat_mlt = dict(zip(mat_mlt_x, mat_mlt_y))
+    mat_mlt = np.array(list(mat_mlt.items()))
+    peaks_to_save_all = []
+    gcurve_all = []
+    peaks_plt, _ = scipy.signal.find_peaks(mat_plt[:, 1], prominence=max(mat_plt[:, 1]) / 100,
+                                           height=max(mat_plt[:, 1]) / 10)
+    peaks_plt, gcurve_plt = find_peak(mat_plt, mat_plt_dr, peaks_plt, peaks_to_save_all, gcurve_all)
+    peaks_to_save_all = []
+    gcurve_all = []
+    peaks_mlt, _ = scipy.signal.find_peaks(mat_mlt[:, 1], prominence=max(mat_mlt[:, 1]) / 100,
+                                           height=max(mat_mlt[:, 1]) / 10)
+    peaks_mlt, gcurve_mlt = find_peak(mat_mlt, mat_mlt_dr, peaks_mlt, peaks_to_save_all, gcurve_all)
+    peaks_to_save_all = []
+    gcurve_all = []
+
+    plot_gcurve(peaks_plt, gcurve_plt, mat_plt, all_plt[i])
+
+    qpos_all = []
+    ppos_all = []
+    q_stdev_circ_all = []
+    p_stdev_circ_all = []
+    qpos, ppos, q_stdev_circ, p_stdev_circ = phasor_eval(peaks_plt, peaks_mlt, qpos_all, ppos_all,
+                                                         q_stdev_circ_all, p_stdev_circ_all)
+    plot_phasor(qpos, ppos, q_stdev_circ, p_stdev_circ, all_plt[i])
 
 
 print(datetime.now() - start)
 javabridge.kill_vm()
 
-"""Nach erstellen der Flowchart die Zeilen in der Console kopieren und auf https://flowchart.js.org/ einfügen """
+""Nach erstellen der Flowchart die Zeilen in der Console kopieren und auf https://flowchart.js.org/ einfügen ""
 
 print("_______________________")
 print("Flowchart wird erstellt")
 print("_______________________")
-create_flowchart()
+create_flowchart()"""

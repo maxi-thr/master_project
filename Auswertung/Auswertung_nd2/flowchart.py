@@ -1,5 +1,7 @@
 from pyflowchart import *
 
+""" OBSOLET!!"""
+
 
 def create_flowchart():
 

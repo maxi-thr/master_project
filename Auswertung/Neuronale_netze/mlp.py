@@ -1,18 +1,16 @@
 import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import train_test_split, cross_val_predict, KFold, cross_val_score
-from sklearn.metrics import accuracy_score, confusion_matrix, plot_confusion_matrix
-from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.metrics import confusion_matrix, plot_confusion_matrix
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import classification_report
 from sklearn.preprocessing import LabelEncoder, StandardScaler, OneHotEncoder
 import pandas as pd
 import numpy as np
-import timing
+import KI.timing
 import pickle
 
 
-data = pd.read_csv("csv/dataset_488.csv")
+data = pd.read_csv("csv/dataset_405.csv")
 data = data.iloc[:, 1:]
 le = LabelEncoder()
 sc = StandardScaler()
@@ -22,7 +20,8 @@ data[["intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "
 Y = data.iloc[:, 0]
 X = data.iloc[:, 1:]
 
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=1, shuffle=True)
+
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=9, shuffle=True, stratify=Y)
 
 print("X_Train Shape: ", x_train.shape)
 print("X_Test Shape: ", x_test.shape)
@@ -70,14 +69,14 @@ def accuracy(confucion_matrix):
     return diagonal_sum / sum_of_all_elements
 
 
-# mlp.fit(x_train, y_train)
-#
-#
-# # save the classifier
-# with open('mlp_model/mlp_classifier', 'wb') as fid:
-#     pickle.dump(mlp, fid)
+mlp.fit(x_train, y_train)
 
-# load it again
+
+# Speicher MLP Classifier
+with open('mlp_model/mlp_classifier', 'wb') as fid:
+    pickle.dump(mlp, fid)
+
+# Lade MLP Classifier
 with open('mlp_model/mlp_classifier', 'rb') as fid:
     mlp_loaded = pickle.load(fid)
 
@@ -87,9 +86,8 @@ cm = confusion_matrix(y_pred, y_test)
 acc = accuracy(cm)
 print("Accuracy of MLPClassifier: ", acc)
 class_names = ["Ahorn", "Buche", "Eiche", "Fichte", "Kiefer", "Laerche"]
-guete = ["AI", "AII", "AIII", "AIV", "Praep"]
 plot_confusion_matrix(mlp_loaded, x_test, y_test, display_labels=class_names)
 plt.title("Accuracy: " + str(acc))
-plt.savefig("confusion_matrix_488.png")
+plt.savefig("confusion_matrix_405.png")
 
 

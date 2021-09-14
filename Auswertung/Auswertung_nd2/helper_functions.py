@@ -8,6 +8,9 @@ import os
 import pickle
 
 
+""" Die Helper Funktions wurden nur zur Erstellung der Phasorplots verwendet"""
+
+
 def cos(x):
     return math.cos(x)
 

@@ -5,7 +5,7 @@ import pandas as pd
 import javabridge
 import bioformats
 from nd2reader import ND2Reader
-import timing
+import KI.timing
 
 
 def collect_plt_mlt_intensity():
@@ -55,8 +55,8 @@ def create_dataset(files):
 
 def create_dataset_from_nd2():
 
-    my_path = r'/media/linux/Seagate Expansion Drive/nd2_files'
-    files = glob.glob(my_path + '/488*/**/*.nd2', recursive=True)
+    my_path = r'F:\nd2_files'
+    files = glob.glob(my_path + '/405 nm x10 M16 100pct Idealholz/**/*.nd2', recursive=True)
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
     all_data = []
@@ -94,7 +94,7 @@ def create_dataset_from_nd2():
                     mean = matrix.mean()
                     data.append(std)
                     data.append(mean)
-                elif "Phase Lifetime" in channel:
+                if "Phase Lifetime" in channel:
                     matrix = values[:, :, i]
                     std = matrix.std()
                     mean = matrix.mean()
@@ -112,13 +112,13 @@ def create_dataset_from_nd2():
 
     columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]
     all_data = pd.DataFrame(data=all_data, columns=columns)
-    save_path = "csv/"
+    save_path = "../Neuronale_netze/csv/"
     if "488" in files[0]:
         all_data.to_csv(save_path + "dataset_488.csv")
     elif "445" in files[0]:
         all_data.to_csv(save_path + "dataset_445.csv")
     elif "405" in files[0]:
-        all_data.to_csv("dataset_405.csv")
+        all_data.to_csv(save_path + "dataset_405.csv")
 
     javabridge.kill_vm()
 
@@ -138,18 +138,6 @@ def create_dataset_from_nd2_altholz():
             exposure_time = raw.camera_exposure_time
             name_data_struct = file.split('.')[0]
             classification = ""
-            # if "Fichte" in name_data_struct:
-            #     art = "Fichte"
-            # elif "Ahorn" in name_data_struct:
-            #     art = "Ahorn"
-            # elif "Buche" in name_data_struct:
-            #     art = "Buche"
-            # elif "Kiefer" in name_data_struct:
-            #     art = "Kiefer"
-            # elif "Laerche" in name_data_struct:
-            #     art = "Laerche"
-            # elif "Eiche" in name_data_struct:
-            #     art = "Eiche"
 
             if "AI\\" in name_data_struct:
                 classification = "AI"
@@ -193,7 +181,7 @@ def create_dataset_from_nd2_altholz():
 
     columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]
     all_data = pd.DataFrame(data=all_data, columns=columns)
-    save_path = "csv/"
+    save_path = "../Neuronale_netze/csv/"
     if "488" in files[0]:
         all_data.to_csv(save_path + "dataset_488_altholz.csv")
     elif "445" in files[0]:
@@ -202,9 +190,3 @@ def create_dataset_from_nd2_altholz():
         all_data.to_csv("dataset_405_altholz_5classes.csv")
 
     javabridge.kill_vm()
-
-
-#files = collect_plt_mlt_intensity()
-#create_dataset(files)
-create_dataset_from_nd2()
-#create_dataset_from_nd2_altholz()

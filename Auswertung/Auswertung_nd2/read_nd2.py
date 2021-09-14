@@ -43,13 +43,14 @@ def readnd2File():
 def readnd2File_ideal():
     all_images = []
     all_exposure_time = []
-    my_path = r'F:\nd2_files\488 nm x10M16 100pct Altholz_Eins'
+    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz'
     files = glob.glob(my_path + '/**/*.nd2', recursive=True)
+    files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
     for file in files:
         """ Read all ND2 Files and create a new path """
         with ND2Reader(file) as images:
-            raw = ND2Reader(file).parser._raw_metadata4
+            raw = ND2Reader(file).parser._raw_metadata
             exposure_time = raw.camera_exposure_time
             all_images.append(images)
             all_exposure_time.append(exposure_time[0])
@@ -82,8 +83,8 @@ def readnd2File_ideal():
 
 def delete():
 
-    my_path = r'../../KI/images/488nm_x10_100pct_exposuretime'
-    files = glob.glob(my_path + '/**/*Lifetime*.png', recursive=True)
+    my_path = r'F:\nd2_files\445 nm x10 M16 100pct Idealholz'
+    files = glob.glob(my_path + '/**/*Phase Lifetime.tif', recursive=True)
     for file in files:
         os.remove(file)
         print('deleted: ' + file)
@@ -101,5 +102,3 @@ def rename_files():
         if i == num_mes + 1:
             y = y + 1
             i = 1
-
-rename_files()
