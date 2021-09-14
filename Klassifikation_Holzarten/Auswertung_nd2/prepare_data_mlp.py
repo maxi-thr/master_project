@@ -55,8 +55,13 @@ def create_dataset(files):
 
 def create_dataset_from_nd2():
 
+<<<<<<< HEAD:Auswertung/Auswertung_nd2/prepare_data_mlp.py
     my_path = r'F:\nd2_files'
     files = glob.glob(my_path + '/405 nm x10 M16 100pct Idealholz/**/*.nd2', recursive=True)
+=======
+    my_path = r'/media/linux/Seagate Expansion Drive/nd2_files/488 nm x10M16 100pct Idealholz'
+    files = glob.glob(my_path + '/**/**/*.nd2', recursive=True)
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/prepare_data_mlp.py
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
     all_data = []
@@ -94,6 +99,7 @@ def create_dataset_from_nd2():
                     mean = matrix.mean()
                     data.append(std)
                     data.append(mean)
+<<<<<<< HEAD:Auswertung/Auswertung_nd2/prepare_data_mlp.py
                 if "Phase Lifetime" in channel:
                     matrix = values[:, :, i]
                     std = matrix.std()
@@ -101,6 +107,21 @@ def create_dataset_from_nd2():
                     data.append(std)
                     data.append(mean)
                 elif "Modulation Lifetime" in channel:
+=======
+                # elif "Phase Lifetime" in channel:
+                #     matrix = values[:, :, i]
+                #     std = matrix.std()
+                #     mean = matrix.mean()
+                #     data.append(std)
+                #     data.append(mean)
+                # elif "Modulation Lifetime" in channel:
+                #     matrix = values[:, :, i]
+                #     std = matrix.std()
+                #     mean = matrix.mean()
+                #     data.append(std)
+                #     data.append(mean)
+                else:
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/prepare_data_mlp.py
                     matrix = values[:, :, i]
                     std = matrix.std()
                     mean = matrix.mean()
@@ -110,15 +131,19 @@ def create_dataset_from_nd2():
 
         all_data.append(data)
 
-    columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]
+    columns = ["art", "intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean", "phase_life_std", "phase_life_mean", "mod_life_std", "mod_life_mean"]
     all_data = pd.DataFrame(data=all_data, columns=columns)
     save_path = "../Neuronale_netze/csv/"
     if "488" in files[0]:
-        all_data.to_csv(save_path + "dataset_488.csv")
+        all_data.to_csv(save_path + "dataset_488_all_channels.csv")
     elif "445" in files[0]:
-        all_data.to_csv(save_path + "dataset_445.csv")
+        all_data.to_csv(save_path + "dataset_445_all_channels.csv")
     elif "405" in files[0]:
+<<<<<<< HEAD:Auswertung/Auswertung_nd2/prepare_data_mlp.py
         all_data.to_csv(save_path + "dataset_405.csv")
+=======
+        all_data.to_csv("dataset_405_all_channels.csv")
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/prepare_data_mlp.py
 
     javabridge.kill_vm()
 

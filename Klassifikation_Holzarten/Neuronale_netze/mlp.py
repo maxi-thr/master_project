@@ -9,14 +9,19 @@ import numpy as np
 import KI.timing
 import pickle
 
+path = "dataset_488_modu.csv"
 
+<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
 data = pd.read_csv("csv/dataset_405.csv")
+=======
+data = pd.read_csv("csv/" + path)
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
 data = data.iloc[:, 1:]
 le = LabelEncoder()
 sc = StandardScaler()
 data['art'] = le.fit_transform(data["art"])
-data[["intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]] = sc.fit_transform(
-    data[["intensity_std", "intensity_mean", "phase_std", "phase_mean", "mod_std", "mod_mean"]])
+data[["mod_std", "mod_mean"]] = sc.fit_transform(
+    data[["mod_std", "mod_mean"]])
 Y = data.iloc[:, 0]
 X = data.iloc[:, 1:]
 
@@ -72,7 +77,11 @@ def accuracy(confucion_matrix):
 mlp.fit(x_train, y_train)
 
 
+<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
 # Speicher MLP Classifier
+=======
+# save the classifier
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
 with open('mlp_model/mlp_classifier', 'wb') as fid:
     pickle.dump(mlp, fid)
 
@@ -88,6 +97,10 @@ print("Accuracy of MLPClassifier: ", acc)
 class_names = ["Ahorn", "Buche", "Eiche", "Fichte", "Kiefer", "Laerche"]
 plot_confusion_matrix(mlp_loaded, x_test, y_test, display_labels=class_names)
 plt.title("Accuracy: " + str(acc))
+<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
 plt.savefig("confusion_matrix_405.png")
+=======
+plt.savefig("confusion_matrix/confusion_matrix" + path + ".png")
+>>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
 
 
