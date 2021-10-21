@@ -11,7 +11,6 @@ from mlxtend.plotting import plot_confusion_matrix
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import warnings
-from KI.obsolet import declare_type
 from PIL import ImageFile
 from pathlib import Path
 import PIL
@@ -72,6 +71,24 @@ for img_p in path:
     except PIL.UnidentifiedImageError:
             print(img_p)
 
+
+def declare_type(type):
+    art = ""
+    if 0 == type:
+        art = "Ahorn"
+    elif 1 == type:
+        art = "Buche"
+    elif 2 == type:
+        art = "Eiche"
+    elif 3 == type:
+        art = "Fichte"
+    elif 4 == type:
+        art = "Kiefer"
+    elif 5 == type:
+        art = "Laerche"
+
+    return art
+
 shape_a = 1004
 shape_b = 1008
 
@@ -83,9 +100,9 @@ epochs = 25
 
 preprocess_input = tf.keras.applications.mobilenet.preprocess_input
 
-train_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
-valid_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
-test_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
+train_gen = ImageDataGenerator(preprocessing_function=preprocess_input, dtype=tf.dtypes.float32)
+valid_gen = ImageDataGenerator(preprocessing_function=preprocess_input, dtype=tf.dtypes.float32)
+test_gen = ImageDataGenerator(preprocessing_function=preprocess_input, dtype=tf.dtypes.float32)
 
 train_batches = train_gen.flow_from_directory(
     'images/405nm_x10_100pct/train',
@@ -116,19 +133,19 @@ test_batches = test_gen.flow_from_directory(
     shuffle=False,
 )
 
-fig = plt.figure()
-axes = []
-x, y = train_batches.next()
-for i in range(0, 8):
-    title = y[i]
-    title = np.argmax(title)
-    title = declare_type(title)
-    image = x[i]
-    axes.append(fig.add_subplot(2, 4, i + 1))
-    axes[-1].set_title(title)
-    plt.imshow(image)
-fig.tight_layout()
-plt.show()
+# fig = plt.figure()
+# axes = []
+# x, y = train_batches.next()
+# for i in range(0, 8):
+#     title = y[i]
+#     title = np.argmax(title)
+#     title = declare_type(title)
+#     image = x[i]
+#     axes.append(fig.add_subplot(2, 4, i + 1))
+#     axes[-1].set_title(title)
+#     plt.imshow(image)
+# fig.tight_layout()
+# plt.show()
 
 test_images = []
 

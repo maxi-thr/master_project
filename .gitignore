@@ -1,0 +1,8 @@
+/Klassifikation_Holzarten/Neuronale_netze/images/
+/Klassifikation_Holzarten/Neuronale_netze/csv/
+/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/
+/Klassifikation_Holzarten/Auswertung_nd2/nd2_files/
+*.png
+*.csv
+*.nd2
+*.tif

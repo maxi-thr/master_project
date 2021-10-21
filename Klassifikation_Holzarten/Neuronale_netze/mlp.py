@@ -6,16 +6,12 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import LabelEncoder, StandardScaler, OneHotEncoder
 import pandas as pd
 import numpy as np
-import KI.timing
 import pickle
 
-path = "dataset_488_modu.csv"
+path = "dataset_405.csv"
 
-<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
-data = pd.read_csv("csv/dataset_405.csv")
-=======
+
 data = pd.read_csv("csv/" + path)
->>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
 data = data.iloc[:, 1:]
 le = LabelEncoder()
 sc = StandardScaler()
@@ -34,8 +30,8 @@ print("Y_Train Shape: ", y_train.shape)
 print("Y_Test Shape: ", y_test.shape)
 
 
-mlp = MLPClassifier(max_iter=500, random_state=1, verbose=True, activation='relu', alpha=0.0001,
-                    hidden_layer_sizes=(256, 128, 64), learning_rate='constant', solver='adam', shuffle=True)
+mlp = MLPClassifier(max_iter=200, random_state=1, verbose=True, activation='relu', alpha=0.0001,
+                    hidden_layer_sizes=(256, 128, 64), learning_rate='constant', solver='adam', shuffle=True, early_stopping=True)
 
 
 def start_gridsearch():
@@ -77,30 +73,24 @@ def accuracy(confucion_matrix):
 mlp.fit(x_train, y_train)
 
 
-<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
 # Speicher MLP Classifier
-=======
-# save the classifier
->>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
-with open('mlp_model/mlp_classifier', 'wb') as fid:
-    pickle.dump(mlp, fid)
 
-# Lade MLP Classifier
-with open('mlp_model/mlp_classifier', 'rb') as fid:
-    mlp_loaded = pickle.load(fid)
+# with open('mlp_model/mlp_classifier', 'wb') as fid:
+#     pickle.dump(mlp, fid)
+#
+# # Lade MLP Classifier
+# with open('mlp_model/mlp_classifier', 'rb') as fid:
+#     mlp_loaded = pickle.load(fid)
 
 
-y_pred = mlp_loaded.predict(x_test)
+y_pred = mlp.predict(x_test)
 cm = confusion_matrix(y_pred, y_test)
 acc = accuracy(cm)
 print("Accuracy of MLPClassifier: ", acc)
 class_names = ["Ahorn", "Buche", "Eiche", "Fichte", "Kiefer", "Laerche"]
-plot_confusion_matrix(mlp_loaded, x_test, y_test, display_labels=class_names)
+plot_confusion_matrix(mlp, x_test, y_test, display_labels=class_names)
 plt.title("Accuracy: " + str(acc))
-<<<<<<< HEAD:Auswertung/Neuronale_netze/mlp.py
-plt.savefig("confusion_matrix_405.png")
-=======
+
 plt.savefig("confusion_matrix/confusion_matrix" + path + ".png")
->>>>>>> 119a1c178a747127c10779518a47060845bf8fd4:Auswertung/KI/mlp.py
 
 

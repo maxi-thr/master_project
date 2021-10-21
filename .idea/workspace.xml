@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6ae3dc64-0e58-4be5-b983-823503d9030c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auswertung/KI/confusion_matrix_488.png" beforeDir="false" afterPath="$PROJECT_DIR$/Auswertung/KI/confusion_matrix_488.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auswertung/KI/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Auswertung/KI/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auswertung/KI/mlp_model/mlp_classifier" beforeDir="false" afterPath="$PROJECT_DIR$/Auswertung/KI/mlp_model/mlp_classifier" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auswertung/KI/prepare_data_mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Auswertung/KI/prepare_data_mlp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/collect_PLT_MLT.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/collect_PLT_MLT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/prepare_data_mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/prepare_data_mlp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/read_nd2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/read_nd2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/cnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_405.csv.png" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_405.csv.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_405_modu.csv.png" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_405_modu.csv.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_488.csv.png" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_488.csv.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_488_modu.csv.png" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/confusion_matrix/confusion_matrixdataset_488_modu.csv.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/mlp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/mlp_model/mlp_classifier" beforeDir="false" afterPath="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/mlp_model/mlp_classifier" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="ProjectId" id="1vLHbdm1iJK5qRpTa4o1fYhnGU2" />
   <component name="ProjectViewState">
@@ -33,7 +41,70 @@
       <recent name="$PROJECT_DIR$/Auswertung/KI/confusion_matrix" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mlp">
+  <component name="RunManager" selected="Python.mlp (1)">
+    <configuration name="cnn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="signifikanzanalyse-von-fluoreszenzabklingzeiten" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/cnn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="signifikanzanalyse-von-fluoreszenzabklingzeiten" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mlp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="signifikanzanalyse-von-fluoreszenzabklingzeiten" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/mlp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="mlp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="signifikanzanalyse-von-fluoreszenzabklingzeiten" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -55,7 +126,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="prepare_data_mlp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="prepare_data_mlp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="signifikanzanalyse-von-fluoreszenzabklingzeiten" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -63,11 +134,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Auswertung/KI" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Auswertung/KI/prepare_data_mlp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/prepare_data_mlp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,12 +149,18 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mlp (1)" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.prepare_data_mlp (1)" />
+        <item itemvalue="Python.cnn" />
         <item itemvalue="Python.mlp" />
-        <item itemvalue="Python.prepare_data_mlp" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6ae3dc64-0e58-4be5-b983-823503d9030c" name="Default Changelist" comment="" />
@@ -94,6 +171,75 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="548" y="153" key="FileChooserDialogImpl" timestamp="1634305783428">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="548" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1634305783428" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1634808002911">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632811250891" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1634808002911" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1634808002911">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632811250890" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1634808002911" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1634808002910">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632811250890" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1634808002910" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1634808002911">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632811250891" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1634808002911" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1634808002899">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632753706002" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1634808002899" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1634808002899">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632753706002" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1634808002899" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1634808002898">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632753706002" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1634808002898" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1634808002899">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632753706002" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1634808002899" />
+    <state x="451" y="60" key="SettingsEditor" timestamp="1632752720357">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="451" y="60" key="SettingsEditor/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1632752720357" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1634817609318">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-3840.-123.1920.1040/-1920.0.1920.1040@0.0.1536.824" timestamp="1634817609318" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1634799948025">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1634799948025" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -101,6 +247,21 @@
           <url>file://$PROJECT_DIR$/Auswertung/KI/prepare_data_mlp.py</url>
           <line>88</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/main.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Klassifikation_Holzarten/Auswertung_nd2/main.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Klassifikation_Holzarten/Neuronale_netze/cnn.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

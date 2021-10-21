@@ -1,6 +1,6 @@
-from Auswertung_nd2.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
-from Auswertung_nd2.helper_functions import *
-from Auswertung_nd2.read_nd2 import readnd2File, readnd2File_ideal
+from Klassifikation_Holzarten.Auswertung_nd2.collect_PLT_MLT import collect_plt_mlt, collect_files_for_each_type
+from Klassifikation_Holzarten.Auswertung_nd2.helper_functions import *
+from Klassifikation_Holzarten.Auswertung_nd2.read_nd2 import readnd2File, readnd2File_ideal
 import tifffile as tiff
 from PIL import Image
 
@@ -16,14 +16,15 @@ if readnd2_ideal:
     images, exposure_time = readnd2File_ideal()
 
 
-all_PLT_MLT_multi = {"PLT": {}, "MLT": {}}
-all_PLT_MLT_single = {"PLT": {}, "MLT": {}}
-files = list(collect_plt_mlt())
+# all_PLT_MLT_multi = {"PLT": {}, "MLT": {}}
+# all_PLT_MLT_single = {"PLT": {}, "MLT": {}}
+files = list(dict.fromkeys(collect_plt_mlt()))
 files = sorted(files)
+
 ideal_files = collect_files_for_each_type(files)
 
 
-def save_images(files):
+def save_images(files, save_path):
     for type in files:
         for tif in type:
             im = tiff.imread(tif)
@@ -46,17 +47,17 @@ def save_images(files):
                 art = "Eiche"
 
             if "488" in name:
-                plt.imsave('../../Neuronale_netze/images/488nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave(save_path + art + '/' + name + '.png', im)
                 print(name)
             elif "445" in name:
-                plt.imsave('../../Neuronale_netze/images/445nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave(save_path + art + '/' + name + '.png', im)
                 print(name)
             elif "405" in name:
-                plt.imsave('../../Neuronale_netze/images/405nm_x10_100pct_exposuretime/' + art + '/' + name + '.png', im)
+                plt.imsave(save_path + art + '/' + name + '.png', im)
                 print(name)
 
 
-save_images(ideal_files)
+save_images(ideal_files, '../Neuronale_netze/images/405nm_x10_100pct_test/')
 
 
 """

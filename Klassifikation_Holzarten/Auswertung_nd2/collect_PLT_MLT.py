@@ -2,7 +2,7 @@ import glob
 
 
 def collect_plt_mlt():
-    my_path = r'F:\nd2_files\488 nm x10M16 100pct Altholz_Eins'
+    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz test'
     files = glob.glob(my_path + '/**/**/*Lifetime*.tif', recursive=True)
     intensity_files = glob.glob(my_path + '/**/**/*Intensity*.tif', recursive=True)
     files += intensity_files

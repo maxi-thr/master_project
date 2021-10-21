@@ -43,7 +43,7 @@ def readnd2File():
 def readnd2File_ideal():
     all_images = []
     all_exposure_time = []
-    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz'
+    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz test'
     files = glob.glob(my_path + '/**/*.nd2', recursive=True)
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
