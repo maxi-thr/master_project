@@ -1,6 +1,6 @@
 # Wood Classification with neural networks
 
-Use the PyCharm IDE with version 2021.2.3 and Python 3.8
+Use the PyCharm IDE with version 2021.2.+ and Python 3.8
 
 ## Preparing your Data
 1. Go into main.py
