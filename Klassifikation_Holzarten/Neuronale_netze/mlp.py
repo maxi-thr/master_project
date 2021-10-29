@@ -8,6 +8,8 @@ import pandas as pd
 import numpy as np
 import pickle
 
+"""Before starting the MLP check your path"""
+
 path = "dataset_405.csv"
 
 

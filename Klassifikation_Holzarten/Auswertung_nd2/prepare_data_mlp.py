@@ -52,8 +52,8 @@ def create_dataset(files):
     return all_data
 
 
-def create_dataset_from_nd2():
-    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz test'
+def create_dataset_from_nd2(path):
+    my_path = path
     files = glob.glob(my_path + '/**/**/*.nd2', recursive=True)
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)

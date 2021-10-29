@@ -17,7 +17,9 @@ import PIL
 import math
 
 
-"""Überprüfe Tensorflow Version und verfügbare GPU"""
+"""Before starting the CNN check your BASE_DIR"""
+
+"""Check Tensorflow Version and GPU"""
 
 print(tf.__version__)
 warnings.filterwarnings("ignore")
@@ -64,7 +66,7 @@ def relocate_images():
 
 #relocate_images()
 
-path = Path("images/405nm_x10_100pct/").rglob("*.png")
+path = Path(BASE_DIR).rglob("*.png")
 for img_p in path:
     try:
         img = PIL.Image.open(img_p)
@@ -105,7 +107,7 @@ valid_gen = ImageDataGenerator(preprocessing_function=preprocess_input, dtype=tf
 test_gen = ImageDataGenerator(preprocessing_function=preprocess_input, dtype=tf.dtypes.float32)
 
 train_batches = train_gen.flow_from_directory(
-    'images/405nm_x10_100pct/train',
+    BASE_DIR + 'train',
     target_size=(shape_a, shape_b),
     color_mode="rgb",
     classes=class_names,
@@ -115,7 +117,7 @@ train_batches = train_gen.flow_from_directory(
 )
 
 val_batches = valid_gen.flow_from_directory(
-    'images/405nm_x10_100pct/val',
+    BASE_DIR + 'val',
     target_size=(shape_a, shape_b),
     color_mode="rgb",
     classes=class_names,
@@ -124,7 +126,7 @@ val_batches = valid_gen.flow_from_directory(
 )
 
 test_batches = test_gen.flow_from_directory(
-    'images/405nm_x10_100pct/test',
+    BASE_DIR + 'test',
     target_size=(shape_a, shape_b),
     color_mode="rgb",
     classes=class_names,
@@ -308,6 +310,7 @@ y_pred = np.argmax(Y_pred, axis=1)
 
 cm = confusion_matrix(test_batches.classes, y_pred)
 plot_confusion_matrix(conf_mat=cm, figsize=(6, 6), class_names=class_names, show_normed=False)
+fig = plt.figure()
 plt.tight_layout()
 plt.show()
 fig.savefig('cm.png')

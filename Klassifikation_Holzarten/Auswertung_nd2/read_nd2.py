@@ -40,10 +40,10 @@ def readnd2File():
                 print("tif file created: " + name_data_struct + "_" + channel + ".tif")
 
 
-def readnd2File_ideal():
+def readnd2File_ideal(path):
     all_images = []
     all_exposure_time = []
-    my_path = r'F:\nd2_files\405 nm x10 M16 100pct Idealholz test'
+    my_path = path
     files = glob.glob(my_path + '/**/*.nd2', recursive=True)
     files = list(dict.fromkeys(files))
     javabridge.start_vm(class_path=bioformats.JARS)
