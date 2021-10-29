@@ -35,7 +35,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 BASE_DIR = 'images/405nm_x10_100pct/'
 class_names = ["Ahorn", "Buche", "Eiche", "Fichte", "Kiefer", "Laerche"]
-
+relocate = False
 
 def relocate_images():
     tf.random.set_seed(1)
@@ -64,7 +64,8 @@ def relocate_images():
                 shutil.move(file_name, BASE_DIR + "test/" + class_names[folder_idx])
 
 
-#relocate_images()
+if relocate:
+    relocate_images()
 
 path = Path(BASE_DIR).rglob("*.png")
 for img_p in path:
