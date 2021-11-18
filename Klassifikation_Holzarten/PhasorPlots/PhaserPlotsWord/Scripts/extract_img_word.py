@@ -1,6 +1,7 @@
 import docx2txt
 import os
 import glob
+import fnmatch
 
 
 def files(path):
@@ -10,7 +11,7 @@ def files(path):
 
 text = ""
 #change to needed directory
-dir = "/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/"
+dir = "C:/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/"
 
 
 
@@ -21,14 +22,13 @@ for file in files(dir):
         os.makedirs(dir + "images/" + file)
 
     result = docx2txt.process(dir + file, dir + "images/" + file)
-    text = " ".join((text, result))
+    text = "\n".join((text, result))
 
 
-labels = text.split('\n\n\n\n\n\n\n')
 
-for label in labels:
-    print(label)
-    label = label.replace('\n', '')
+#text = text.replace("\n", "#")
+
+labels = text.split('\n')
+labels = fnmatch.filter(labels, '*M*')
 
 
-print(labels)
