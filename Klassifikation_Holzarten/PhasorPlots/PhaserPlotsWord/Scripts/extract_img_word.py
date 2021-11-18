@@ -54,9 +54,17 @@ for img_folder in imag_dirs:
 i=0
 
 
-#loop over all the images in every subfolder of 'image' and rename them to the according label
+#loop over all the images in every subfolder of 'image' and rename them to the according label + move all named images into the Datastore
+
+#adjust destination for own PC!
+destination = "C:/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/PhasorPlotsDatastorage"
+if not os.path.isdir(destination):
+    os.makedirs(destination)
+
 for img_folder in imag_dirs:
     temp_path = dir_img + img_folder
     for file in files(temp_path):
         os.rename(temp_path + '/' + file, temp_path + '/' + labels[i] + '.png')
+        shutil.copy(temp_path + '/' + labels[i] + '.png', destination)
         i += 1
+
