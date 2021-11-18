@@ -9,11 +9,12 @@ def files(path):
             yield file
 
 text = ""
-dir = "/home/linux/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhasorPlotsWord/"
+#change to needed directory
+dir = "C:/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/"
 
 
 
-for file in files("../PhasorPlotsWord"):
+for file in files(dir):
     print (file)
 
     if not os.path.isdir(dir + "images/" + file):
@@ -22,7 +23,15 @@ for file in files("../PhasorPlotsWord"):
     result = docx2txt.process(dir + file, dir + "images/" + file)
     text = " ".join((text, result))
 
-if os.path.isfile('/home/linux/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhasorPlotsWord/.~lock.Phaser_Plots_04112021.docx#'):
-    os.remove('/home/linux/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhasorPlotsWord/.~lock.Phaser_Plots_04112021.docx#')
+labels = text.replace('\n','')
+labels = text.split('\n\n\n\n\n\n\n')
+i=0
 
-print(text)
+for label in labels:
+    print(label)
+    if "," not in label:
+        labels.pop(i)
+
+    i += 1
+
+print(labels)
