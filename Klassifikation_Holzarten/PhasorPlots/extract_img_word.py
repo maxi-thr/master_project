@@ -10,12 +10,12 @@ def files(path):
 
 text = ""
 #change to needed directory
-dir = "C:/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/"
+dir = "/Users/Maxi/signifikanzanalyse-von-fluoreszenzabklingzeiten/Klassifikation_Holzarten/PhasorPlots/PhaserPlotsWord/"
 
 
 
 for file in files(dir):
-    print (file)
+    print(file)
 
     if not os.path.isdir(dir + "images/" + file):
         os.makedirs(dir + "images/" + file)
@@ -23,15 +23,12 @@ for file in files(dir):
     result = docx2txt.process(dir + file, dir + "images/" + file)
     text = " ".join((text, result))
 
-labels = text.replace('\n','')
+
 labels = text.split('\n\n\n\n\n\n\n')
-i=0
 
 for label in labels:
     print(label)
-    if "," not in label:
-        labels.pop(i)
+    label = label.replace('\n', '')
 
-    i += 1
 
 print(labels)
